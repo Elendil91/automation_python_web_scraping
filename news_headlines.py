@@ -14,7 +14,7 @@ dt_ = dt.strftime("%m%d%Y") #mmddyy
 
 
 #define the website
-website = "https://brocoders.com/blog/react-vs-vue-comparison-2021/#:~:text=React%20requires%20solid%20JavaScript%20skills,are%20written%20with%20HTML%20templates." 
+website = "https://bitcoinmagazine.com/" 
 
 #define the path where download chromedrive.exe
 path = (r"\Users\Narsil\Downloads\chromedriver.exe") #put r before your normal string it converts normal string to raw string
@@ -33,7 +33,7 @@ driver.get(website)
 
 #//div[@class="header-module--title--32KBA"]
 
-containers = driver.find_elements(by="xpath", value='//div[@class="inner header-module--wrapper--3HEoJ"]')  #method: find_element (singular for one element), parameters: by="", value=""
+containers = driver.find_elements(by="xpath", value='//phoenix-ellipsis[@class="m-ellipsis m-card--header"]')  #method: find_element (singular for one element), parameters: by="", value=""
                                                                                                    #to avoid conflict, use simple quotes. 
 #//div[@class="inner header-module--wrapper--3HEoJ"]/div/h1
 
@@ -42,20 +42,20 @@ titles = []
 links = []
 
 for container in containers:
-    title = container.find_element(by="xpath", value='./div/h1').text  #the dot replace the xpath function above and to get only the text, use function .text
-    link = container.find_element(by="xpath", value='./div/ul/li/a').get_attribute("href")
+    title = container.find_element(by="xpath", value='./a/h2').text  #the dot replace the xpath function above and to get only the text, use function .text
+    #link = container.find_element(by="xpath", value='./div/ul/li/a').get_attribute("href")
     
     titles.append(title)
-    links.append(link)
+    #links.append(link)
     
     
-my_dic = {'Title': titles, 'Link': links } 
+my_dic = {'Title': titles} 
 
 
 df_headlines = pd.DataFrame(my_dic)
 
-df_headlines.to_csv('headlines.csv')
-df_headlines.to_csv('headlines-headless.csv') #from headless mode 
+df_headlines.to_csv('headlines1.csv')
+df_headlines.to_csv('headlines-headless1.csv') #from headless mode 
 
  
 file_n = f'headlines-{dt_}.csv'
