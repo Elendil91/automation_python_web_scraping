@@ -8,9 +8,9 @@ import sys
 
 app_path = os.path.dirname(sys.executable)
 
-dt = datetime.now()
+now = datetime.now()
 
-dt_ = dt.strftime("%m%d%Y") #mmddyy 
+dt_ = now.strftime("%m%d%Y") #mmddyy 
 
 
 #define the website
@@ -43,21 +43,20 @@ links = []
 
 for container in containers:
     title = container.find_element(by="xpath", value='./a/h2').text  #the dot replace the xpath function above and to get only the text, use function .text
-    #link = container.find_element(by="xpath", value='./div/ul/li/a').get_attribute("href")
+    link = container.find_element(by="xpath", value='./a').get_attribute("href")
     
     titles.append(title)
-    #links.append(link)
+    links.append(link)
     
     
-my_dic = {'Title': titles} 
+my_dic = {'Title': titles, 'Link': links} 
 
 
 df_headlines = pd.DataFrame(my_dic)
 
-df_headlines.to_csv('headlines1.csv')
-df_headlines.to_csv('headlines-headless1.csv') #from headless mode 
+#df_headlines.to_csv('headlines1.csv')
+#df_headlines.to_csv('headlines-headless1.csv') #from headless mode 
 
- 
 file_n = f'headlines-{dt_}.csv'
 
 final_path = os.path.join(app_path, file_n)
